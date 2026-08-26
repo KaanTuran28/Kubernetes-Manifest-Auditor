@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardened-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hardened-app
+  template:
+    metadata:
+      labels:
+        app: hardened-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.25.3-alpine@sha256:1111111111111111111111111111111111111111111111111111111111111111
+          securityContext:
+            privileged: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "250m"
+              memory: "128Mi"

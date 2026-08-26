@@ -1,0 +1,23 @@
+[project]
+name = "kubernetes-manifest-auditor"
+version = "0.1.0"
+description = "Static security auditor for Kubernetes workload manifests: privileged containers, host namespace sharing, dangerous capabilities, root containers, unpinned images."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Kaan Turan" }]
+dependencies = ["PyYAML>=6.0"]
+
+[project.scripts]
+kubernetes-manifest-auditor = "kubernetes_manifest_auditor:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["kubernetes_manifest_auditor"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
